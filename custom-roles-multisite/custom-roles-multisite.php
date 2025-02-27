@@ -124,13 +124,14 @@ class CustomRolesPermissions
         'gf_edit_forms',
         'looker-studio-dashboard',
         'scribe-ai-dashboard',
+        'wpseo_workouts',
       ];
       $this->filter_menu_items($menu, $allowed_menus);
       $this->filter_submenu_items($submenu, $allowed_menus);
     }
 
     if (current_user_can('franchisee') && count(wp_get_current_user()->roles) === 1) {
-      $this->hide_specific_menu_items(['edit.php?post_type=popup', 'profile.php', 'tools.php']);
+      $this->hide_specific_menu_items(['edit.php?post_type=popup', 'profile.php', 'tools.php', 'wpseo_workouts']);
       $this->remove_profile_from_users_submenu();
       $this->remove_add_new_page_for_franchisee();
     }
@@ -480,7 +481,10 @@ class CustomRolesPermissions
         echo '<style>
                   body.post-type-page .page-title-action { display:none; }
                   body.post-type-page .trash,
-                  body.post-type-page .duplicate { display:none !important; }
+                  body.post-type-page .duplicate,
+                  .bulkactions, #toplevel_page_sib_page_home
+                  { display:none !important; }
+
               </style>';
       });
 
